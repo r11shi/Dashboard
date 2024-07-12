@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | My Courses</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+</head>
+<body>
+  <div class="main">
+    <div>
+      <div id="sidebar-container"></div>  
+  </div>
+  <div class="my-courses">
+      <h1>My Courses</h1>
+
+      <!-- courses -->
+
+      <div id="courses">
+        <div class="course skeleton skeleton-main no-border">
+          <div class="img skeleton"></div>
+
+          <div class="course-info">
+            <h2 class="skeleton">Python programming full course</h2>
+
+            <div class="skeleton">
+              <small>Beginners 1hr23m</small>
+              <div>
+                <div class="progress-bar-wrapper">
+                  <div class="progress-bar"></div>
+                </div>
+                <div class="progress-percentage">30%</div>
+              </div>
+            </div>
+
+            <button class="skeleton">Complete the course</button>
+          </div>
+        </div>
+        <div class="course skeleton skeleton-main no-border">
+          <div class="img skeleton"></div>
+
+          <div class="course-info">
+            <h2 class="skeleton">Python programming full course</h2>
+
+            <div class="skeleton">
+              <small>Beginners 1hr23m</small>
+              <div>
+                <div class="progress-bar-wrapper">
+                  <div class="progress-bar"></div>
+                </div>
+                <div class="progress-percentage">30%</div>
+              </div>
+            </div>
+
+            <button class="skeleton">Complete the course</button>
+          </div>
+        </div>
+        <div class="course skeleton skeleton-main no-border">
+          <div class="img skeleton"></div>
+
+          <div class="course-info">
+            <h2 class="skeleton">Python programming full course</h2>
+
+            <div class="skeleton">
+              <small>Beginners 1hr23m</small>
+              <div>
+                <div class="progress-bar-wrapper">
+                  <div class="progress-bar"></div>
+                </div>
+                <div class="progress-percentage">30%</div>
+              </div>
+            </div>
+
+            <button class="skeleton">Complete the course</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- courses end -->
+    </div>
+
+    <!-- MyCourses page end -->
+  </div>
+  </div>
+    
+    <script>
+        
+     fetch('sidebar.html')
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById('sidebar-container').innerHTML = data;
+     });
+
+
+    const dummyData = [
+        {
+            imageUrl: "assets/python.jpg",
+            courseTitle: "Python programming full course",
+            difficulty: "Beginners",
+            duration: "1hr23min",
+            progressPercent: 50
+        },
+
+        {
+            imageUrl: "assets/java.jpg",
+            courseTitle: "Java full course",
+            difficulty: "Beginners",
+            duration: "1hr43min",
+            progressPercent: 60
+        },
+
+        {
+            imageUrl: "assets/js.png",
+            courseTitle: "Javascript full course",
+            difficulty: "Beginners",
+            duration: "1hr",
+            progressPercent: 90
+        },
+    ];
+
+
+    window.addEventListener("load", (e)=>{
+        fetchCourses();
+    });
+
+    async function fetchCourses(){
+        try {
+            const dummyElements = document.querySelectorAll(".skeleton-main");
+            const response = await fetch("/getCourses");
+            dummyElements.forEach((el)=>{
+                el.remove();
+            });
+            if(response.ok){
+                const responseData = await response.json();
+                renderCourses(responseData);
+            }else{
+                renderCourses(dummyData);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    function createCard(imageUrl, courseTitle, difficulty, duration, progressPercent){
+        
+        const courseCard = document.createElement("div");
+        courseCard.classList.add("course");
+
+        const courseImage = document.createElement("img");
+        courseImage.src = imageUrl;
+        courseImage.alt = "Course image";
+        courseImage.classList.add("img");
+
+        const courseInfo = document.createElement("div");
+        courseInfo.classList.add("course-info");
+
+        const course_title = document.createElement("h2");
+        course_title.textContent = courseTitle;
+        courseInfo.append(course_title);
+
+        const progressAndDurationContainer = document.createElement("div");
+        courseInfo.append(progressAndDurationContainer);
+
+        const courseDifficulty = document.createElement("small");    
+        courseDifficulty.textContent = `${difficulty}・${duration}`;
+        progressAndDurationContainer.append(courseDifficulty);
+
+        const progressAndPercentageContainer = document.createElement("div");
+        progressAndDurationContainer.append(progressAndPercentageContainer);
+
+        const progressWrapper = document.createElement("div");
+        progressWrapper.classList.add("progress-bar-wrapper");
+        progressAndPercentageContainer.append(progressWrapper);
+
+        const progressBar = document.createElement("div");
+        progressBar.classList.add("progress-bar");
+        progressBar.style.width = String(progressPercent)+"%";
+        progressWrapper.append(progressBar);
+
+        const progress_percent = document.createElement("div");
+        progress_percent.classList.add("progress-percentage");
+        progress_percent.textContent = `
+        ${progressPercent}%`;
+        progressAndPercentageContainer.append(progress_percent);
+
+        const button = document.createElement("button");
+        button.textContent = "Complete the course";
+        courseInfo.append(button);
+        
+        courseCard.append(courseImage);
+        courseCard.append(courseInfo);
+
+        return courseCard;
+    }
+
+    function renderCourses(responseData){
+        const coursesContainer = document.querySelector("#courses");
+        if(responseData.length === 0){
+            const h3 = document.createElement("h3");
+            h3.textContent = "You haven't bought any courses yet";
+            coursesContainer.append(h3);
+            return; 
+        }
+        const docFrag = new DocumentFragment();
+
+        for(course of responseData){
+            const {imageUrl, courseTitle, difficulty, duration, progressPercent} = course;
+            docFrag.append( createCard(imageUrl, courseTitle, difficulty, duration, progressPercent) );
+        }
+
+        coursesContainer.append(docFrag);
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Recources</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <div class="main">
+        <div>
+            <div id="sidebar-container"></div>  
+        </div>
+
+            <div class="resources">
+                <h2>Study Material</h2>
+                <div class="section">
+                    <div class="section-item">
+                        <a href="./resources/physics-notes.pdf" download="physics-notes">
+                        <div class="placeholder"></div>
+                        <p>Physics notes</p>
+                        </a>
+                    </div>
+                    <div class="section-item">
+                        <a href="resources/javascript_tutorial.pdf" download="javascript_tutorial.pdf">
+                        <div class="placeholder"></div>
+                        <p>Javascript notes</p>
+                    </a>
+                    </div>
+                    <div class="section-item">
+                        <a href="resources/Tutorial_EDIT.pdf" download="Tutorial_EDIT.pdf">
+                        <div class="placeholder"></div>
+                        <p>Python notes</p></a>
+                    </div>
+                    <div class="section-item">
+                        <a href="./resources/java_tutorial.pdf" download="java_tutorial">
+                        <div class="placeholder"></div>
+                        <p>Java notes</p>
+                        </a>
+                    </div>
+                </div>
+                <br>
+                <h2>Reading lists</h2>
+                <div class="section">
+                    <div class="section-item">
+                        <div class="placeholder"></div>
+                        <a href="./resources/java_tutorial.pdf" download="java_tutorial">
+                        <p>Javascript by James Faulkner</p>
+                        </a>
+                    </div>
+                    <div class="section-item">
+                        <a href="./resources/java_tutorial.pdf" download="java_tutorial">
+                        <div class="placeholder"></div>
+                        <p>Python by Guido van Rossum</p>
+                        </a>
+                    </div>
+                    <div class="section-item">
+                        <a href="./resources/java_tutorial.pdf" download="java_tutorial">
+                        <div class="placeholder"></div>
+                        <p>Java by James Gosling</p>
+                        </a>
+                    </div>
+                    <div class="section-item">
+                        <a href="./resources/java_tutorial.pdf" download="java_tutorial">
+                        <div class="placeholder"></div>
+                        <p>C++ by Bjarne Stroustrup</p>
+                        </a>
+                    </div>
+                </div>
+                <br>
+                <h2>Useful links</h2>
+                <div class="useful-links">
+                    <a href="https://www.behance.net/">🔗Behance</a>
+                    <a href="https://www.geeksforgeeks.org/">🔗Geeks for Geeks</a>
+                    <a href="https://twitter.com/?lang=en">🔗Twitter</a>
+                    <a href="https://stackoverflow.com/">🔗Stack Overflow</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+        });
+    </script>
+</body>
+</html>

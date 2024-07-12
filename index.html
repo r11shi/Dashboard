@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <div class="main">
+        <div>
+            <div id="sidebar-container"></div>  
+        </div>
+        <div class="content">
+            <p>Home</p>
+            <!---  The actual section  --->
+            <div class="courses">
+                <h2>Enrolled Courses</h2>
+                <div class="cards">
+                    <div class="card">
+                        <img src="./assets/js.png" alt="">
+                        <h3>Javascript Free Course</h3>
+                        <p>1hr 20m</p>
+                    </div>
+                    <div class="card">
+                        <img src="./assets/java.jpg" alt="">
+                        <h3>Java Programming</h3>
+                        <p>18hr 20m</p>
+                    </div>
+                    <div class="card">
+                        <img src="./assets/python.jpg" alt="">
+                        <h3>Python Programming</h3>
+                        <p>2hr 50m</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info">
+                <div class="ann">
+                    <h2>Announcements</h2>
+                    <div class="list">
+
+                        <div class="item">
+                            <div class="ann-icon">📢</div>
+                            <div class="ann-content">
+                                <h3>New Module in Course</h3>
+                                <p>Check your My courses page for the update.</p>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="ann-icon">🎥</div>
+                            <div class="ann-content">
+                                <h3>Webinar on JavaScript</h3>
+                                <p>Join us at webinar at 3PM Friday.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="deadlines">
+                    <h2>Upcoming Deadlines</h2>
+
+                    <div class="list">
+
+                        <div class="item">
+                            <div class="deadline-content">
+                                <h3>• Assignment 01</h3>
+                                <p>Due Date: July 10, 2024</p>
+                            </div>
+                        </div>
+                         
+                        <div class="item">
+                            <div class="deadline-content">
+                                <h3>• Assignment 05</h3>
+                                <p>Due Date: July 10, 2024</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+            });
+    </script>
+</body>
+</html>

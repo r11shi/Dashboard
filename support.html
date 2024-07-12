@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Support</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+    <script async src="https://basicons.xyz/embed.js"> </script>
+</head>
+
+<body>
+    <div>
+        <div id="sidebar-container"></div>  
+    </div>
+    <div class="supp-container">
+
+        <div class="supp-grid">
+
+            <div class="supp-card">
+
+                <h2>Frequently Asked Questions</h2>
+
+                <ul class="faq-list">
+                    <li class="faq-item">
+                        <div class="faq-question">How do I reset my password?</div>
+                        <div class="faq-answer">To reset your password, click on the "Forgot Password" link on the login
+                            page and follow the instructions sent to your email.</div>
+                    </li>
+
+                    <li class="faq-item">
+                        <div class="faq-question">How can I track my course progress?</div>
+                        <div class="faq-answer">You can view your course progress on the Progress Tracker page, which
+                            shows your completed courses, watch time, and achievements.</div>
+                    </li>
+
+                    <li class="faq-item">
+                        <div class="faq-question">What should I do if a video isn't loading?</div>
+                        <div class="faq-answer">First, try refreshing the page. If the issue persists, clear your
+                            browser cache or try a different browser. If you're still having trouble, please submit a
+                            support request.</div>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="supp-card">
+
+                <h2>Submit a Support Request</h2>
+
+                <form class="supp-form" id="myform">
+                    <label for="name">Name</label>
+                    <input type="text" class="name" id="name" required>
+
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required>
+
+                    <label for="cate">Category</label>
+                    <select name="cate" id="cate" required>
+                        <option>Selct one Category</option>
+                        <option value="technicalsupport">Technical Support</option>
+                        <option value="academicassistance">Academic Assistance</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" rows="5" required></textarea>
+
+                    <button type="submit">Sumit</button>
+
+                </form>
+
+            </div>
+
+            <div class="supp-card">
+
+                <h2>Your Support Request</h2>
+
+                <ul class="request-list">
+                    <li class="request-item">
+                        <strong>Technical Issue with a Video Playback</strong>
+                        <p class="request-status">Status: In Progress</p>
+                    </li>
+
+                    <li class="request-item">
+                        <strong>Question about Course Material</strong>
+                        <p class="request-status">Status: Resolved</p>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        document.getElementById('myform').addEventListener('submit', function (event) {
+
+            event.preventDefault();
+
+            alert('Response Submitted Successfully !!');
+
+            location.reload();
+
+        });
+
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+        });
+    </script>
+
+</body>
+
+</html>

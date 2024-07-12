@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Assignments</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <div class="main">
+        <div>
+            <div id="sidebar-container"></div>  
+        </div>
+
+        <div class="content">
+            <p></p>
+            <!---  The actual section  --->
+            <div class="assignments">
+                <h2>Assignments</h2>
+                <div class="assign-cards">
+                    <div class="a-card">
+                        <h3>Assignment 01</h3>
+                        <p>Due Date: July 10, 2024</p>
+                        <button onclick="openPDF('pdfs/Assignment01.pdf')">View</button>
+                        <button onclick="showModal(this)">Upload</button>
+                        <p class="status" style="margin: 10px 0; color: red;"><i>Feedback: Great work on the layout, fix your navbar.</i></p>
+                    </div>
+
+                    <div class="a-card">
+                        <h3>Assignment 07</h3>
+                        <p>Due Date: July 19, 2024</p>
+                        <button style="background-color: #568ee1;"onclick="openPDF('pdfs/Assignment02.pdf')">View</button>
+                        <button style="background-color: #568ee1;">Upload</button>
+                        <p class="status" style="color : red; margin-top : 10px">Assignment is Completed</p>
+                    </div>
+                    
+                    <div class="a-card">
+                        <h3>Assignment 05</h3>
+                        <p>Due Date: July 25, 2024</p>
+                        <button onclick="openPDF('pdfs/Assignment01.pdf')">View</button>
+                        <button onclick="showModal(this)">Upload</button>
+                        <p class="status"></p>
+                    </div>
+
+                    <div class="a-card">
+                        <h3>Assignment 04</h3>
+                        <p>Due Date: July 21, 2024</p>
+                        <button onclick="openPDF('pdfs/Assignment02.pdf')">View</button>
+                        <button onclick="showModal(this)">Upload</button>
+                        <p class="status"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-main" id="modal-c">
+            <div class="modal" id="modal">
+                <div class="MContent">
+                    <div class="top">
+                        <h2>Submission</h2>
+                        <div class="close" onclick="closeModal()">&times;</div>
+                    </div>
+                    <form id="submit-form">
+                        <input type="file" required>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+            });
+
+        let btn;
+
+        function showModal(button) {
+            document.getElementById("modal-c").style.transition = 'all 0.3s ease'
+            document.getElementById("modal-c").style.display = 'flex';
+            btn = button;
+        }
+
+        function closeModal() {
+            document.getElementById("modal-c").style.display = 'none';
+        }
+
+        document.getElementById("submit-form").onsubmit = function(e) {
+            e.preventDefault();
+            alert("Assignment submitted");
+            closeModal();
+
+            const buttons = btn.parentElement.querySelectorAll("button");
+            buttons.forEach(button => {
+                button.style.backgroundColor = "#568ee1";
+                button.disabled = true;
+            });
+
+            const statusElement = btn.parentElement.querySelector(".status");
+            statusElement.textContent = "Assignment is completed";
+            statusElement.classList.add("completed");
+        }
+
+        function openPDF(pdfUrl) {
+            window.open(pdfUrl, '_blank');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sidebar Component</title>
+    <script async src="https://basicons.xyz/embed.js"></script>
+    <style>
+      :root {
+        --main-color: #f4f4f6;
+        --transition: all 0.3s ease;
+        --active-bg-color: #1266e3;
+        --active-text-color: #fff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        color: var(--text-color);
+        background-color: white;
+      }
+
+      .main {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        position: sticky;
+        width: 240px;
+        background-color: var(--main-color);
+        padding: 20px;
+        height: 100vh;
+        overflow-y: auto;
+      }
+
+      .sidebar-heading {
+        font-size: 14px;
+        color: var(--text-light);
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+
+      .menu {
+        list-style-type: none;
+      }
+
+      .side-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px;
+        margin-bottom: 5px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .side-item:hover {
+        background-color: white;
+      }
+
+      .side-item.active {
+        background-color: blue;
+        color: var(--active-text-color);
+      }
+
+      .side-item a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: inherit;
+        text-decoration: none;
+        width: 100%;
+      }
+
+      .side-item a:hover {
+        text-decoration: none;
+      }
+
+      .side-item img {
+        width: 20px;
+        height: 20px;
+      }
+
+      .content {
+        flex-grow: 1;
+        padding: 30px;
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="sidebar">
+        <nav>
+          <h2 class="sidebar-heading">Menu</h2>
+          <ul class="menu">
+            <li class="side-item">
+              <a href="index.html"><img src="/assets/home.svg" alt="" /><span>Home</span></a>
+            </li>
+            <li class="side-item">
+              <a href="mycourses.html"><img src="/assets/my-courses.svg" alt="" /><span>My Courses</span></a>
+            </li>
+            <li class="side-item">
+              <a href="assign.html"><img src="/assets/assignment.svg" alt="" /><span>Assignments</span></a>
+            </li>
+            <li class="side-item">
+              <a href="progressbar.html"><img src="/assets/progress.svg" alt="" /><span>Progress</span></a>
+            </li>
+            <li class="side-item">
+              <a href="resources.html"><img src="/assets/resources.svg" alt="" /><span>Resources</span></a>
+            </li>
+          </ul>
+          <h2 class="sidebar-heading">Profile</h2>
+          <ul class="menu">
+            <li class="side-item">
+              <a href="profile.html"><img src="/assets/pfp.svg" alt="" /><span>Profile</span></a>
+            </li>
+            <li class="side-item">
+              <a href="messages.html"><img src="/assets/messages.svg" alt="" /><span>Messages</span></a>
+            </li>
+            <li class="side-item">
+              <a href="support.html"><img src="/assets/support.svg" alt="" /><span>Support</span></a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </body>
+</html>

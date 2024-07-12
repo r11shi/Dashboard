@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Progress</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <div class="progress">
+        <div>
+            <div id="sidebar-container"></div>  
+        </div>
+        
+        <div class="dash-container">
+            <div class="dash-grid">
+                <div class="info-box">
+                    <h2>Progress Overview</h2>
+                    <canvas id="chart"></canvas>
+                </div>
+                <div class="info-box">
+                    <h2>Course Progress</h2>
+                    <ul class="course-list">
+                        <li class="course-item">
+                            <div>Python Programming (60%)</div>
+                            <div class="progress-bars"><div class="progress-fill" style="width: 60%"></div></div>
+                        </li>
+                        <li class="course-item">
+                            <div>JavaScript   (40%)</div>
+                            <div class="progress-bars"><div class="progress-fill" style="width: 40%"></div></div>
+                        </li>
+                        <li class="course-item">
+                            <div>C++ Fundamentals (20%)</div>
+                            <div class="progress-bars"><div class="progress-fill" style="width: 20%"></div></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="info-box">
+                    <h2>Milestones</h2>
+                    <ul class="milestone-list">
+                        <li class="milestone-item">✓ Finished first course</li>
+                        <li class="milestone-item">✓ Watched 50 hours of content</li>
+                        <li class="milestone-item">☐ Complete 5 courses</li>
+                        <li class="milestone-item">☐ Reach 80% overall progress</li>
+                    </ul>
+                </div>
+                <div class="info-box">
+                    <h2>Activity</h2>
+                    <canvas id="line"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+        });
+
+        const chart = document.querySelector("#chart");
+        new Chart(chart, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    'Completed courses',
+                    'Courses to do'
+                ],
+                datasets: [{
+                    label: 'Course progress',
+                    data: [4, 1],
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                    ],
+                    hoverOffset: 4
+                }],
+            },
+        });
+
+        new Chart(
+            document.querySelector("#line"),
+            {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July'],
+                    datasets: [{
+                        label: 'Activity',
+                        data: [10, 80, 30, 50, 45, 65, 40],
+                        fill: true,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function (value, index, ticks) {
+                                    return '';
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        );
+    </script>
+</body>
+</html>

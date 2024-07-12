@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Messages</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <div>
+        <div id="sidebar-container"></div>  
+    </div>
+    <div class="msghead">
+        <h2 style="margin-left: 20px;">Messages</h2>
+        <div id="app">
+            <div id="navbar"></div>
+            <div id="chat">
+                <div id="chat-header">Select a contact to start chatting</div>
+                <div id="messages"></div>
+                <div id="input-area">
+                    <input type="text" id="message-input" placeholder="Type a message...">
+                    <button id="send-button">Send</button>
+                </div>
+            </div>
+        </div> 
+    </div>
+        <script>
+            
+        const contacts = [
+            { name: 'Shriniwas', pfp: 'pfps/shriniwas.jpg', lastMessage: 'Hey there!' },
+            { name: 'Ameya', pfp: 'pfps/ameya.jpg', lastMessage: 'How are you?' },
+            { name: 'Hrishikesh', pfp: 'pfps/hrishi.jpg', lastMessage: 'See you soon' },
+            { name: 'Sanskar', pfp: 'pfps/sanskar.jpg', lastMessage: 'Thanks!' },
+            { name: 'Manthan', pfp: 'pfps/manthan.jpg', lastMessage: 'Bye!' },
+            { name: 'Pramod', pfp: 'pfps/pramod.jpg', lastMessage: 'Got it!' },
+            { name: 'Om', pfp: 'pfps/om.jpg', lastMessage: 'See you soon' }
+        ];
+
+        let currentContact = null;
+        const userPfp = 'pfps/profile.jpg';
+
+        function loadContacts() {
+            const navbar = document.getElementById('navbar');
+            contacts.forEach(contact => {
+                const div = document.createElement('div');
+                div.className = 'contact';
+                div.innerHTML = `
+                    <img src="${contact.pfp}" alt="${contact.name}">
+                    <div>${contact.name}</div>
+                `;
+                div.onclick = () => selectContact(contact);
+                navbar.appendChild(div);
+            });
+        }
+
+        function selectContact(contact) {
+            currentContact = contact;
+            document.getElementById('messages').innerHTML = `
+                <div class="message other-message">
+                    <img src="${contact.pfp}" alt="Profile Picture">
+                    <span>${contact.lastMessage}</span>
+                </div>
+            `;
+            document.getElementById('chat-header').textContent = contact.name;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('message-input');
+            const message = input.value.trim();
+            if (message && currentContact) {
+                addMessage(message, 'user-message', userPfp);
+                input.value = '';
+                setTimeout(() => {
+                    addMessage('Thank you for your message. We will get back to you soon.', 'other-message', currentContact.pfp);
+                }, 1000);
+            }
+        }
+
+        function addMessage(text, className, pfp) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${className}`;
+            messageDiv.innerHTML = `
+                <img src="${pfp}" alt="Profile Picture">
+                <span>${text}</span>
+            `;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        loadContacts();
+
+        document.getElementById('send-button').addEventListener('click', sendMessage);
+        document.getElementById('message-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        fetch('sidebar.html')
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById('sidebar-container').innerHTML = data;
+        });
+
+
+
+        </script>
+</body>
+
+</html>

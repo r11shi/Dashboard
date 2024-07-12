@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <div class="main">
+        <div>
+            <div id="sidebar-container"></div>  
+        </div>
+            <!-- Profile Page -->
+            <div class="profile-page">
+                <h2>Edit Profile</h2>
+                <div class="profile-section">
+                    <img src="./assets/pfp.png" alt="Profile Picture" id="profile-pic">
+                    <button onclick="changePicture()">Change Picture</button>
+                    <button onclick="removePicture()">Remove Picture</button>
+                </div>
+                <div class="profile-grp">
+                    <div class="personal-info">
+                        <h2>Personal Information</h2>
+                        <form>
+                            <div class="form-group">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" name="first-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" id="last-name" name="last-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone-number">Phone Number</label>
+                                <input type="text" id="phone-number" name="phone-number">
+                            </div>
+                            <div class="form-group">
+                                <label for="dob">Date of Birth</label>
+                                <input type="date" id="dob" name="dob">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="change-password">
+                        <h2>Change Password</h2>
+                        <form>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="last-password">Last Password</label>
+                                <input type="password" id="last-password" name="last-password">
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">New Password</label>
+                                <input type="password" id="new-password" name="new-password">
+                            </div>
+                            <button type="button" onclick="resetPassword()">Reset Password</button>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+        });
+
+        function changePicture() {
+
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            
+            input.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const profilePic = document.getElementById('profile-pic');
+                        profilePic.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            input.click();
+        }
+
+        function removePicture() {
+            const profilePic = document.getElementById('profile-pic');
+            profilePic.src = "./assets/camera2.svg"; 
+        }
+
+        function resetPassword() {
+            alert('Password has been changed.')
+        }
+
+    </script>
+</body>
+</html>
