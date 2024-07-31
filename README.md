@@ -73,4 +73,3 @@ Empower your learning journey with StudentHub Dashboard - Where organization mee
 
 ---
 
-Feel free to adjust the technology stack, live demo links, or any other details as needed. This README will serve as a comprehensive introduction and guide for users and contributors alike.
