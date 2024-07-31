@@ -419,6 +419,7 @@ ul{
     font-weight: 600;
     color: black;
     transition: ease-in;
+    resize : none;
 }
 .request-item{
     padding: 15px;
