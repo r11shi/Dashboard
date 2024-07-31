@@ -37,7 +37,7 @@ To get a local copy up and running, follow these simple steps:
    git clone https://github.com/your-username/StudentHub-Dashboard.git
    ```
 2. **Navigate to the project directory**:
-   ```sh
+   ```
    cd StudentHub-Dashboard
    ```
 3. **Open `index.html`** in your preferred web browser to view the application.
@@ -67,7 +67,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Developed with ❤️ by Ameya Kawade, Om Kadam, Manthan Marathe, Shriniwas Kore, Pramod Vaidya, Sanskar Ubale, Rushikesh Maddewad
+  ```
+  Developed with ❤️ by Ameya Kawade, Om Kadam, Manthan Marathe, Shriniwas Kore, Pramod Vaidya, Sanskar Ubale, Rushikesh Maddewad
+  ```
 
 Empower your learning journey with StudentHub Dashboard - Where organization meets academic excellence!
 
