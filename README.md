@@ -10,7 +10,7 @@ https://github.com/user-attachments/assets/e25d4f8f-682d-4c7c-a519-97e6639ec64d
 
 *Click above to watch a quick demo!*
 
-[Live Demo](https://your-live-demo-link.com) | [GitHub Repository](https://github.com/your-username/StudentHub-Dashboard)
+[Live Demo](https://dashboard-24.vercel.app) | [GitHub Repository](https://github.com/your-username/StudentHub-Dashboard)
 
 ## Your All-in-One Academic Command Center 🎓
 
