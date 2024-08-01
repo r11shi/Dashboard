@@ -85,14 +85,20 @@
   </div>
     
     <script>
+    
+    async function main(){
+      try {
+        const sidebarRequest = await fetch('sidebar.html');
+        const response = await sidebarRequest.text();
         
-     fetch('sidebar.html')
-                    .then(response => response.text())
-                    .then(data => {
-                        document.getElementById('sidebar-container').innerHTML = data;
-     });
+        document.getElementById('sidebar-container').innerHTML = response;
 
-
+        fetchCourses();
+      } catch (error) {
+        alert("Something went wrong");
+      }
+    }
+    main();
     const dummyData = [
         {
             imageUrl: "assets/python.jpg",
@@ -119,25 +125,18 @@
         },
     ];
 
-
-    window.addEventListener("load", (e)=>{
-        fetchCourses();
-    });
-
     async function fetchCourses(){
         try {
-            const dummyElements = document.querySelectorAll(".skeleton-main");
             const response = await fetch("/getCourses");
-            dummyElements.forEach((el)=>{
-                el.remove();
-            });
             if(response.ok){
                 const responseData = await response.json();
                 renderCourses(responseData);
-            }else{
+            }
+            else{  
                 renderCourses(dummyData);
             }
         } catch (error) {
+            alert("Something went wrong!!");
             console.log(error);
         }
     }
@@ -208,7 +207,10 @@
             const {imageUrl, courseTitle, difficulty, duration, progressPercent} = course;
             docFrag.append( createCard(imageUrl, courseTitle, difficulty, duration, progressPercent) );
         }
-
+        const dummyElements = document.querySelectorAll(".skeleton-main");
+        dummyElements.forEach((el)=>{
+          el.remove();
+        });
         coursesContainer.append(docFrag);
     }
     </script>
